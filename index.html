@@ -277,27 +277,6 @@
     ⬆ REGISTRAR ENTRADA
   </button>
 
-</main>
-
-<div class="historial-wrap" id="pantallaHistorial">
-  <div class="historial-titulo">Historial de Fichajes</div>
-  <div id="listaHistorial"></div>
-</div>
-
-    <div class="ajuste-valor" id="textoURL">No configurado</div>
-    <button class="ajuste-btn-cambiar" onclick="abrirConfig()">Cambiar URL</button>
-  </div>
-  <div class="instrucciones">
-    <h3>📋 Cómo conectar con Google Sheets</h3>
-    <ol>
-      <li>Abre tu <strong>Google Sheet</strong> de fichajes</li>
-      <li>Ve a <strong>Extensiones → Apps Script</strong></li>
-      <li>Borra el código y pega el código de Apps Script</li>
-      <li>Pulsa <strong>Implementar → Nueva implementación</strong></li>
-      <li>Tipo: <strong>Aplicación web</strong> · Acceso: <strong>Cualquier persona</strong></li>
-      <li>Copia la <strong>URL de implementación</strong> y pégala arriba</li>
-    </ol>
-  </div>
   <div class="instrucciones">
     <h3>📱 Instalar en Android como app</h3>
     <ol>
@@ -307,6 +286,12 @@
       <li>Confirma · Ya tienes el icono en el escritorio</li>
     </ol>
   </div>
+
+</main>
+
+<div class="historial-wrap" id="pantallaHistorial">
+  <div class="historial-titulo">Historial de Fichajes</div>
+  <div id="listaHistorial"></div>
 </div>
 
 <nav class="nav-bottom">
@@ -319,13 +304,6 @@
 </nav>
 
 <div class="toast" id="toast"></div>
-
-  <div class="overlay-sub">Pega la URL de tu Google Apps Script para guardar los fichajes automáticamente.</div>
-  <input class="overlay-input" id="inputURL" type="url" placeholder="https://script.google.com/macros/s/AKfy.../exec">
-  <button class="overlay-btn" onclick="guardarURL()">GUARDAR Y CONTINUAR</button>
-  <div class="overlay-nota">Los fichajes se guardan localmente hasta que configures la conexión.</div>
-  <span class="overlay-enlace" onclick="cerrarConfig()">Configurar más tarde</span>
-</div>
 
 <script>
 let tipoFichaje='entrada', tipoJornada='entrenamiento', gpsData=null;
@@ -517,18 +495,8 @@ function mostrarPantalla(p){
   document.getElementById('pantallaFichaje').style.display=p==='fichaje'?'flex':'none';
   document.getElementById('relojWrap').style.display=p==='fichaje'?'block':'none';
   document.getElementById('pantallaHistorial').classList.toggle('visible',p==='historial');
-  document.getElementById('pantallaAjustes').classList.toggle('visible',p==='ajustes');
-  ['Fichar','Historial',].forEach(n=>document.getElementById('nav'+n).classList.toggle('active',p===n.toLowerCase()));
+  ['Fichar','Historial'].forEach(n=>document.getElementById('nav'+n).classList.toggle('active',p===n.toLowerCase()));
   if(p==='historial') renderHistorial();
-  if(p==='ajustes')   actualizarAjustes();
-}
-
-// ── Ajustes / Config ──────────────────────────────────────────────────────────
-
-
-
-
-  else{mostrarToast('⚠️ URL no válida','error');}
 }
 
 // ── Toast ─────────────────────────────────────────────────────────────────────
